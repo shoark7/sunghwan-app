@@ -5,4 +5,4 @@ __all__ = ['index']
 
 # Create your views here.
 def index(request):
-    return render(request, 'root/base.html')
+    return render(request, 'root/index.html')

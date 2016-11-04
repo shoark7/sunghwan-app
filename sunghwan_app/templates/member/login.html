@@ -1,0 +1,21 @@
+{% extends 'root/base.html' %}
+
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-md-offset-3 col-md-6">
+      <div class="well login-box">
+        <form action="" method='POST'>
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button style='margin-top:10px; width:100%; font-weight:bold; border: 2px solid black;' class="btn btn-default" type="submit">로그인</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

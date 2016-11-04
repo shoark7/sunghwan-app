@@ -3,6 +3,7 @@ from django.contrib.auth.models \
     import User, BaseUserManager, UserManager, AbstractBaseUser, PermissionsMixin
 from django.conf import settings
 import os
+from django.contrib.staticfiles.templatetags.staticfiles import static
 
 
 # Create your models here.
@@ -77,5 +78,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if self.image:
             return self.imgage.url
         else:
-            return os.path.join(settings.STATIC_DIR, 'images/default-user.png')
+            return static('images/default-user.png')
 

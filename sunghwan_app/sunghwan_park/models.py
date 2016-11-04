@@ -24,3 +24,6 @@ class Movie(models.Model):
             return self.img_thumbnail.url
         else:
             return static('images/default-movie.png')
+
+    class Meta:
+        ordering=['-watched_date']
