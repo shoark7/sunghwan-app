@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     # essential information
-    username = models.CharField(max_length=20)
+    username = models.CharField(max_length=20, unique=True)
     full_name = models.CharField(max_length=20)
     nickname = models.CharField(max_length=20)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -40,6 +40,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     # manager
     objects = CustomUserManager()
 
-
-    USERNAME_FIELD = username
+    USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['full_name']
