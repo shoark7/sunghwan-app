@@ -4,15 +4,24 @@ from django.conf import settings
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 from sunghwan_park.models import Movie
+from django.conf import settings
 import os
 import requests
 from django.contrib import messages
+from PIL import Image
+from io import BytesIO
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 
 # Create your views here.
 __all__ = ['movie_list', 'movie_update',]
 
 def movie_list(request):
-    pass
+    movies = Movie.objects.all()
+    context = {
+        'movies': movies,
+    }
+    return render(request, 'sunghwan_park/movie_list.html', context)
 
 
 def movie_update(request):
@@ -35,13 +44,16 @@ def movie_update(request):
 
     # 0 : watch_or_not, 1: title, 2: director, 3: genre,
     # 4: my_comment , 5: my_score, 6: watched_date,
-    ws = wb.worksheets[1]
+
     new_movies = []
-    for row in ws.rows:
-        if row[0].value != 'a': # 'a' means 'watched or not'
-            continue
-        elif row[1].value not in movie_titles:
-            new_movies.append(row)
+    worksheets = wb.worksheets
+
+    for ws in worksheets:
+        for row in ws.rows:
+            if row[0].value != 'a': # 'a' means 'watched or not'
+                continue
+            elif row[1].value not in movie_titles:
+                new_movies.append(row)
 
     if not new_movies:
         messages.info(request, "새 영화가 없습니다.")
@@ -59,9 +71,24 @@ def movie_update(request):
             full_url = url+row[1].value.replace(' ', '')
             movie_text = requests.get(full_url, headers=headers).text
             soup = BeautifulSoup(movie_text, 'xml')
-            img_url = soup.channel.item.image.string
+            try:
+                img_url = soup.channel.item.image.string
+            except:
+                img_url = None
+
             if not img_url:
                 img_url = os.path.join(settings.STATIC_DIR, 'images/default-movie.png')
+            else:
+                # img_source = requests.get(img_url).content
+                # img_bytes = BytesIO(img_source)
+                # img_presave = Image.open(img_bytes)
+                # img_presave_location = os.path.join(settings.STATIC_DIR, 'images/movie')
+                #
+                # img_name = row[1].value + '.jpg'
+                # img_presave.save(os.path.join(img_presave_location,img_name))
+                # img_url = os.path.join(img_presave_location, img_name)
+                pass
+
             movie = Movie.objects.create(
                 title=row[1].value,
                 director=row[2].value,

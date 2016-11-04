@@ -27,7 +27,7 @@ class CustomUserManager(BaseUserManager):
     def create_superuser(self, username, password, full_name, nickname, phonenumber, image=None,is_sunghwan=True,):
 
         if not image:
-            image = os.path.join(settings.STATIC_DIR, 'images/default_user.png')
+            image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
 
         user = self.model(
             username=username,
@@ -72,3 +72,5 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def get_short_name(self):
         return self.nickname
+
+
