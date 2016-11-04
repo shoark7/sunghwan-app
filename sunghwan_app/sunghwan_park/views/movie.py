@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from openpyxl import load_workbook
-from django.conf import settings
 from django.http import HttpResponse
 from bs4 import BeautifulSoup
 from sunghwan_park.models import Movie
@@ -76,29 +75,49 @@ def movie_update(request):
             except:
                 img_url = None
 
-            if not img_url:
-                img_url = os.path.join(settings.STATIC_DIR, 'images/default-movie.png')
-            else:
-                # img_source = requests.get(img_url).content
-                # img_bytes = BytesIO(img_source)
-                # img_presave = Image.open(img_bytes)
-                # img_presave_location = os.path.join(settings.STATIC_DIR, 'images/movie')
-                #
-                # img_name = row[1].value + '.jpg'
-                # img_presave.save(os.path.join(img_presave_location,img_name))
-                # img_url = os.path.join(img_presave_location, img_name)
-                pass
-
-            movie = Movie.objects.create(
+            movie = Movie(
                 title=row[1].value,
                 director=row[2].value,
                 genre=row[3].value,
                 my_comment=row[4].value,
                 my_score=float(row[5].value),
                 watched_date=row[6].value,
-                img_thumbnail=img_url
             )
-    return HttpResponse('새 영화가 등록되었습니다.')
+
+            if not img_url:
+                movie.save()
+
+            else:
+                img_source = requests.get(img_url).content
+                bytes_file = BytesIO(img_source)
+                image = Image.open(bytes_file)
+                image_format = image.format
+                temp_file = BytesIO()
+                image.save(temp_file, image_format)
+                temp_file.seek(0)
+
+                path, ext = os.path.splitext(img_url)
+                name = os.path.basename(path)
+                print(name, ext)
+                img_name = '%s%s' % (name, ext)
+
+                movie.img_thumbnail.save(img_name, ContentFile(temp_file.read()))
+                movie.save()
+                print(movie)
+
+            # movie = Movie.objects.create(
+            #     title=row[1].value,
+            #     director=row[2].value,
+            #     genre=row[3].value,
+            #     my_comment=row[4].value,
+            #     my_score=float(row[5].value),
+            #     watched_date=row[6].value,
+            #     img_thumbnail=img_url
+            # )
+        # Time for making it csvs
+        # movies = Movie.objects.all()
+
+        return HttpResponse('새 영화가 등록되었습니다.')
 
 # 0 : watch_or_not, 1: title, 2: director, 3: genre,
 # 4: my_comment , 5: my_score, 6: watched_date,

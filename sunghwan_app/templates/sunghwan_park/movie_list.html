@@ -14,13 +14,15 @@
   {% for movie in movies %}
   <div class="col-md-2 col-sm-6">
     <div class="thumbnail">
-      <a href=""><img src="{{movie.img_thumbnail}}" alt="" width="100%" style='height:150px'>
+      <a href=""><img src="{{ movie.get_img_thumbnail }}" alt="" width="100%" style='height:150px'>
       </a>
-      {% comment %}
-      <h4>{{movie.title}}</h4>
+      <h6 class='label-title'>{{movie.title|truncatechars:'16'}}</h4>
+    {% comment %}
+
       <p>{{movie.director}}</p>
       <p>{{movie.my_score}}</p>
-      {% endcomment %}
+    {% endcomment %}
+
     </div>
   </div>
 

@@ -9,8 +9,8 @@ import os
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password, full_name, nickname, phonenumber, image=None,is_sunghwan=False,):
 
-        if not image:
-            image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
+        # if not image:
+        #     image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
 
         user = self.model(
             username=username,
@@ -26,8 +26,8 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, username, password, full_name, nickname, phonenumber, image=None,is_sunghwan=True,):
 
-        if not image:
-            image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
+        # if not image:
+        #     image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
 
         user = self.model(
             username=username,
@@ -73,4 +73,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     def get_short_name(self):
         return self.nickname
 
+    def get_image(self):
+        if self.image:
+            return self.imgage.url
+        else:
+            return os.path.join(settings.STATIC_DIR, 'images/default-user.png')
 
