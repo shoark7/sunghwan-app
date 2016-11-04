@@ -6,8 +6,8 @@ class Movie(models.Model):
     title = models.CharField(max_length=20, unique=True)
     director = models.CharField(max_length=20)
     genre = models.CharField(max_length=10)
-    my_comment = models.TextField
-    my_score = models.FloatField
+    my_comment = models.TextField(default='')
+    my_score = models.FloatField(default=0.0)
     watched_date = models.DateField()
     img_thumbnail = models.ImageField(upload_to='movie', blank=True, null=True)
 

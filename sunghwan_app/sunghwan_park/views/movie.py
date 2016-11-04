@@ -18,7 +18,7 @@ def movie_list(request):
 def movie_update(request):
     """
     This function is only for administrators.
-    Compare the excel file to the exsiting Movie model.
+    Compare the excel file to the exsiting Movie model instances.
     If new movie is written, make a new Movie model instance with a photo given by bs4
     :param request:
     :return: none. Just Movie model update
@@ -48,9 +48,30 @@ def movie_update(request):
         return HttpResponse("새 영화가 없습니다.")
 
     else: # if new movies exist
-        naver_movie_search_url = 'https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='
+        headers = {
+                    'X-Naver-Client-Id': settings.CLIENT_ID,
+                    'X-Naver-Client-Secret': settings.CLIENT_SECRET,
+                  }
+        url = 'https://openapi.naver.com/v1/search/movie.xml?display=1&query='
+
 
         for row in new_movies:
-            full_url = naver_movie_search_url+row[1].value.replace(' ', '')
-            movie_text = requests.get(full_url)
-            soup = BeautifulSoup(movie_text, 'html.parser')
+            full_url = url+row[1].value.replace(' ', '')
+            movie_text = requests.get(full_url, headers=headers).text
+            soup = BeautifulSoup(movie_text, 'xml')
+            img_url = soup.channel.item.image.string
+            if not img_url:
+                img_url = os.path.join(settings.STATIC_DIR, 'images/default-movie.png')
+            movie = Movie.objects.create(
+                title=row[1].value,
+                director=row[2].value,
+                genre=row[3].value,
+                my_comment=row[4].value,
+                my_score=float(row[5].value),
+                watched_date=row[6].value,
+                img_thumbnail=img_url
+            )
+    return HttpResponse('새 영화가 등록되었습니다.')
+
+# 0 : watch_or_not, 1: title, 2: director, 3: genre,
+# 4: my_comment , 5: my_score, 6: watched_date,

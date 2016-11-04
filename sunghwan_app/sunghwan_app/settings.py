@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.10/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -137,3 +137,12 @@ STATICFILES_DIRS = [
 # media root
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+# .conf > NAVER api
+CONF_DIR = os.path.join(BASE_DIR, '.conf')
+config = json.loads(open(os.path.join(CONF_DIR, 'naver_movie_api.json')).read())
+
+CLIENT_ID = config['client_id']
+CLIENT_SECRET = config['client_secret']

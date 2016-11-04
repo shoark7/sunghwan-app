@@ -1,1 +1,1 @@
-from .movie import movie_list
+from .movie import movie_list, movie_update
