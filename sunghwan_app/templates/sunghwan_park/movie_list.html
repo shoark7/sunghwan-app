@@ -1,0 +1,33 @@
+{% extends 'root/base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+
+  <div class="row">
+    <div class="text-center panel">
+      <h2>내가 지난 2년 간 본 영화들</h2>
+    </div>
+  </div>
+
+  {% for movie in movies %}
+  <div class="col-md-2 col-sm-6">
+    <div class="thumbnail">
+      <a href=""><img src="{{movie.img_thumbnail}}" alt="" width="100%" style='height:150px'>
+      </a>
+      {% comment %}
+      <h4>{{movie.title}}</h4>
+      <p>{{movie.director}}</p>
+      <p>{{movie.my_score}}</p>
+      {% endcomment %}
+    </div>
+  </div>
+
+  {% empty %}
+  <p>No movies available</p>
+
+  {% endfor %}
+</div>
+
+{% endblock content %}
