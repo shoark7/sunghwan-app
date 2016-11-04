@@ -4,12 +4,13 @@ from django.contrib.auth.models \
 from django.conf import settings
 import os
 
+
 # Create your models here.
 class CustomUserManager(BaseUserManager):
     def create_user(self, username, password, full_name, nickname, phonenumber, image=None,is_sunghwan=False,):
 
         if not image:
-            image = os.path.join(settings.STATIC_DIR, 'images/default_user.png')
+            image = os.path.join(settings.STATIC_DIR, 'images/default-user.png')
 
         user = self.model(
             username=username,
@@ -39,7 +40,7 @@ class CustomUserManager(BaseUserManager):
 
         )
         user.set_password(password)
-        user.is_superuser = True
+        user.is_superuser=True
         user.save()
 
         return user
