@@ -31,10 +31,10 @@ def movie_list(request):
 def movie_update(request):
     """
     This function is only for administrators.
-    Compare the excel file to the exsiting Movie model instances.
-    If new movie is written, make a new Movie model instance with a photo given by bs4
+    Compare the excel file to the existing Movie model instances.
+    If any new movies are written, make new Movie model instances with a photo given by bs4.
     :param request:
-    :return: none. Just Movie model update
+    :return: none. Just Movie model update for the administrator.
     """
 
     # Check if a new movie is added
@@ -43,8 +43,6 @@ def movie_update(request):
 
     xl_directory_name = os.path.join(settings.STATIC_DIR, 'others/박성환 영화 희망 및 관람 목록.xlsx')
     wb = load_workbook(xl_directory_name)
-
-    # need refactoring. We have 3 sheets but only 1 sheet is provided
 
     # 0 : watch_or_not, 1: title, 2: director, 3: genre,
     # 4: my_comment , 5: my_score, 6: watched_date,
@@ -103,12 +101,12 @@ def movie_update(request):
 
                 path, ext = os.path.splitext(img_url)
                 name = os.path.basename(path)
-                print(name, ext)
+                # print(name, ext)
                 img_name = '%s%s' % (name, ext)
 
                 movie.img_thumbnail.save(img_name, ContentFile(temp_file.read()))
                 movie.save()
-                print(movie)
+                # print(movie)
 
             # movie = Movie.objects.create(
             #     title=row[1].value,
@@ -122,7 +120,7 @@ def movie_update(request):
         # Time for making it csvs
         # movies = Movie.objects.all()
 
-        return HttpResponse('새 영화가 등록되었습니다.')
+        return redirect('member:index')
 
 # 0 : watch_or_not, 1: title, 2: director, 3: genre,
 # 4: my_comment , 5: my_score, 6: watched_date,

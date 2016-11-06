@@ -23,7 +23,7 @@ class LoginForm(forms.Form):
 
 class SignupForm(forms.Form):
     username = forms.CharField(
-        label='username',
+        label='ID',
         max_length=20,
         widget=forms.TextInput(
             attrs={
@@ -32,7 +32,7 @@ class SignupForm(forms.Form):
         )
     )
     password1 = forms.CharField(
-        label='password1',
+        label='비밀번호',
         max_length=20,
         widget=forms.PasswordInput(
             attrs={
@@ -41,7 +41,7 @@ class SignupForm(forms.Form):
         )
     )
     password2 = forms.CharField(
-        label='password1',
+        label='비밀번호 확인',
         max_length=20,
         widget=forms.PasswordInput(
             attrs={
@@ -50,7 +50,7 @@ class SignupForm(forms.Form):
         )
     )
     full_name = forms.CharField(
-        label='full_name',
+        label='이름',
         max_length=20,
         widget=forms.TextInput(
             attrs={
@@ -59,7 +59,7 @@ class SignupForm(forms.Form):
         )
     )
     nickname = forms.CharField(
-        label='nickname',
+        label='별명',
         max_length=20,
         widget=forms.TextInput(
             attrs={
@@ -68,7 +68,7 @@ class SignupForm(forms.Form):
         )
     )
     phonenumber = forms.CharField(
-        label='phonenumber',
+        label='휴대폰 번호',
         max_length=20,
         widget=forms.TextInput(
             attrs={
@@ -77,7 +77,7 @@ class SignupForm(forms.Form):
         )
     )
     image = forms.ImageField(
-        label='image',
+        label='회원 사진',
         required=False,
     )
 
