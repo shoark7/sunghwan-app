@@ -6,9 +6,12 @@ from bs4 import BeautifulSoup
 
 __all__ =['naver_blog_post']
 
-def naver_blog_post(movie_title):
-    url = 'https://openapi.naver.com/v1/search/blog.xml?display=10&start=1&query='
-    full_url = url + '영화 ' + movie_title
+def naver_blog_post(movie_title, page=1):
+    url_front = 'https://openapi.naver.com/v1/search/blog.xml?display=10&start='
+    page = int(page)
+    page = str(page-1)
+    url_back = '1&query='
+    full_url = url_front+ page+url_back + '영화 ' + movie_title
 
     headers = {
         # 'X-Naver-Client-Id': 'eHimOLa8w9EWy7fb4LtZ',

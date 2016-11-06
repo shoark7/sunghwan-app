@@ -64,4 +64,13 @@ ul.dropdown-menu {
   font-weight: bold;
 }
 
+ul.pagination {
+  margin: auto;
+  display: inline-block;
+}
+
+ul.pagination li {
+  display: inline;
+}
+
 /*# sourceMappingURL=base.css.map */
