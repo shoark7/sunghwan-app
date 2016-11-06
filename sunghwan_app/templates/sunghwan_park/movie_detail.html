@@ -21,8 +21,31 @@
     </div>
     <div class="col-md-offset-1 col-md-5 col-sm-12 well blog-post">
     <h3>영화에 대한 반응</h3>
-    <h4>네이버 블로그 상위 포스트 기준</h4>
+    <h5>*네이버 블로그 상위 포스트 기준</h4>
+    <hr>
 
+
+      <div class="panel-group" id="accordion">
+      {% for post in blog_post_list %}
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">
+            <a style='color:green;' data-toggle="collapse" data-parent="#accordion" href="#collapse{{ forloop.counter }}">
+            {{ post.0 }}
+            </a>
+          </h4>
+        </div>
+
+        <div id="collapse{{ forloop.counter }}" class="panel-collapse collapse ">
+          <div class="panel-body" >
+            {{ post.1 }}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      </div>
+    </div>
 
     </div>
   </div>

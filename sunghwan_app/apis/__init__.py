@@ -1,0 +1,1 @@
+from .naver_blog_post import naver_blog_post
