@@ -33,4 +33,30 @@ ul.dropdown-menu {
   border-radius: 3px;
 }
 
+.movie-detail div {
+  display: inline-block;
+  box-sizing: content-box;
+  padding: 10px;
+}
+
+.movie-detail div#movie-data p {
+  margin-bottom: 5px;
+}
+
+.movie-detail div#movie-data p span.movie-info {
+  min-width: 100px;
+  display: inline-block;
+  text-align: center;
+}
+
+.movie-detail div#movie-data p span.movie-real-info {
+  display: inline-block;
+  font-weight: bold;
+}
+
+.blog-post h3 {
+  text-align: center;
+  font-weight: bold;
+}
+
 /*# sourceMappingURL=base.css.map */

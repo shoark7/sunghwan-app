@@ -1,0 +1,32 @@
+{% extends 'root/base.html' %}
+
+{% block content %}
+
+
+<div class="container">
+  <div id="full-container">
+    <div class=" col-md-6 col-sm-12 panel movie-detail well">
+      <div class="">
+        <img src="{{ movie.get_img_thumbnail }}" alt="">
+      </div>
+      <div id="movie-data">
+        <p><span class='movie-info'>제목 :</span><span class='movie-real-info'>{{ movie.title }}</span></p>
+        <p><span class='movie-info'>감독 :</span><span class='movie-real-info'>{{ movie.director }}</span></p>
+        <p><span class='movie-info'>장르 :</span><span class='movie-real-info'>{{ movie.genre }}</span></p>
+        <p><span class='movie-info'>나의 한 줄평 :</span><span class='movie-real-info'>{{ movie.my_comment}}</span></p>
+        <p><span class='movie-info'>내 점수는요! : </span><span class='movie-real-info'>{{ movie.my_score }}</span></p>
+        <p><span class='movie-info'>관람일자 : </span><span class='movie-real-info'>{{ movie.watched_date }}</span></p>
+      </div>
+
+    </div>
+    <div class="col-md-offset-1 col-md-5 col-sm-12 well blog-post">
+    <h3>영화에 대한 반응</h3>
+    <h4>네이버 블로그 상위 포스트 기준</h4>
+
+
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
