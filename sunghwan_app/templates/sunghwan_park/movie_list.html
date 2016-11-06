@@ -6,8 +6,18 @@
 <div class="container">
 
   <div class="row">
-    <div class="text-center panel">
-      <h2>내가 지난 2년 간 본 영화들</h2>
+    <div class="text-center movie-list-panel" style='position:relative'>
+      <h2 style='display:inline-block'><abbr title="안녕하세요!">박성환</abbr>이 본 영화 목록 2015-2016</h2>
+
+        <form action="" method='POST' class='order-by'>
+          {% csrf_token %}
+          <select name="order-criteria" id="" class="order-criteria">
+            <option value="watched_date">최신 관람 순</option>
+            <option value="my_score">높은 평점 순</option>
+          <select>
+          <button class="btn btn-default btn-sm" type="submit">Go!</button>
+        </form>
+
     </div>
   </div>
 

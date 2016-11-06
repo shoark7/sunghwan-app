@@ -25,5 +25,3 @@ class Movie(models.Model):
         else:
             return static('images/default-movie.png')
 
-    class Meta:
-        ordering=['-watched_date']

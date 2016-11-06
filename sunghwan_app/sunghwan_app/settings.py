@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-LOGIN_URL = '/login'
+LOGIN_URL = '/login/'
 
 # user definition
 AUTH_USER_MODEL = 'member.CustomUser'

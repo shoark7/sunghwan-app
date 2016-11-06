@@ -1,3 +1,7 @@
+.movie-list-panel {
+  margin-bottom: 50px;
+}
+
 .navbar-nav > li > a {
   width: 100px;
   text-align: center;
@@ -14,6 +18,19 @@ ul.dropdown-menu {
 
 .login-box {
   margin-top: 50px;
+}
+
+.order-by {
+  top: 20px;
+  right: 0;
+  position: absolute;
+  display: inline-block;
+}
+
+.order-criteria {
+  height: 29px;
+  background-color: white;
+  border-radius: 3px;
 }
 
 /*# sourceMappingURL=base.css.map */

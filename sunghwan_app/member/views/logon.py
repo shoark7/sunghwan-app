@@ -9,7 +9,7 @@ __all__ = ['login', 'logout',]
 
 
 def login(request):
-    next = request.GET.get('next')
+    next = request.GET.get('next') or ''
     context = {}
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -18,8 +18,12 @@ def login(request):
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
             user = auth_authenticate(username=username, password=password)
-            auth_login(request, user)
-            return redirect(next)
+            if user is not None:
+                auth_login(request, user)
+                return redirect(next)
+            else:
+                print('뭔일이지 이게.. ', user)
+                context['form'] = LoginForm()
 
         else:
             context['form'] = form
@@ -31,4 +35,5 @@ def login(request):
 def logout(request):
     next = request.GET.get('next')
     auth_logout(request)
+
     return redirect(next)

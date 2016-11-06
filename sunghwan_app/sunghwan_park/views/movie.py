@@ -10,7 +10,6 @@ from django.contrib import messages
 from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
@@ -18,7 +17,11 @@ __all__ = ['movie_list', 'movie_update',]
 
 @login_required
 def movie_list(request):
-    movies = Movie.objects.all()
+    if request.method == 'POST':
+        order_criteria = request.POST['order-criteria']
+        movies = Movie.objects.order_by('-'+order_criteria)
+    else:
+        movies = Movie.objects.all()
     context = {
         'movies': movies,
     }
