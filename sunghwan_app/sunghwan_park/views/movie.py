@@ -11,6 +11,7 @@ from PIL import Image
 from io import BytesIO
 from django.core.files.base import ContentFile
 from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
 
 # Create your views here.
 __all__ = ['movie_list', 'movie_update',]
@@ -28,6 +29,7 @@ def movie_list(request):
     return render(request, 'sunghwan_park/movie_list.html', context)
 
 
+@staff_member_required
 def movie_update(request):
     """
     This function is only for administrators.
@@ -51,7 +53,9 @@ def movie_update(request):
     worksheets = wb.worksheets
 
     for ws in worksheets:
+
         for row in ws.rows:
+            print(row[0].value, row[1].value)
             if row[0].value != 'a': # 'a' means 'watched or not'
                 continue
             elif row[1].value not in movie_titles:

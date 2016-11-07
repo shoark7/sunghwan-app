@@ -3,6 +3,7 @@ from ..models import Movie
 from django.contrib import messages
 from apis import naver_blog_post
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User, UserManager
 
 __all__ = ['movie_detail',]
 
