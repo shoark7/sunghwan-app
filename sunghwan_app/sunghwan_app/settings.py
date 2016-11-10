@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 import json
 import os
+import sys
+import json
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'quamk5m$#5x-=xc17$(4al3bq4q3d_(=k%h6)-v4trvme#!d9m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
 
 ALLOWED_HOSTS = [
     '.stonehead-studio.com',
@@ -85,15 +88,32 @@ TEMPLATES = [
 WSGI_APPLICATION = 'sunghwan_app.wsgi.application'
 
 
+
+
+
+# .conf > NAVER api
+CONF_DIR = os.path.join(BASE_DIR, '.conf')
+config = json.loads(open(os.path.join(CONF_DIR, 'naver_movie_api.json')).read())
+
+CLIENT_ID = config['client_id']
+CLIENT_SECRET = config['client_secret']
+
+
+
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    config_debug = json.loads(open(os.path.join(CONF_DIR, 'settings_debug.json')).read())
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
     }
-}
+
+else:
+    config_deploy = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
+    DATABASES = config_deploy['databases']
 
 
 # Password validation
@@ -144,10 +164,3 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
 
 
-
-# .conf > NAVER api
-CONF_DIR = os.path.join(BASE_DIR, '.conf')
-config = json.loads(open(os.path.join(CONF_DIR, 'naver_movie_api.json')).read())
-
-CLIENT_ID = config['client_id']
-CLIENT_SECRET = config['client_secret']
