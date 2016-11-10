@@ -45,7 +45,7 @@ def movie_update(request):
     movies = Movie.objects.all()
     movie_titles = [movie.title for movie in movies]
 
-    xl_directory_name = os.path.join(settings.STATIC_DIR, 'others/박성환 영화 희망 및 관람 목록.xlsx')
+    xl_directory_name = os.path.join(settings.STATIC_ROOT, 'others/박성환 영화 희망 및 관람 목록.xlsx')
     wb = load_workbook(xl_directory_name)
 
     # 0 : watch_or_not, 1: title, 2: director, 3: genre,
