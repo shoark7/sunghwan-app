@@ -25,7 +25,9 @@ SECRET_KEY = 'quamk5m$#5x-=xc17$(4al3bq4q3d_(=k%h6)-v4trvme#!d9m'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '.stonehead-studio.com',
+]
 
 LOGIN_URL = '/login/'
 
