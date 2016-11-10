@@ -16,7 +16,10 @@ class Command(BaseCommand):
             User.objects.create_superuser(
                 username=username,
                 # email='shoark7@gmail.com',
-                password=password
+                password=password,
+                full_name='sunghwan park',
+                nickname='stonehead',
+                phonenumber='01024956962'
             )
         else:
             print('default superuser exist')
