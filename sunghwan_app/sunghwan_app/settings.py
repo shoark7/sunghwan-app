@@ -110,7 +110,6 @@ if DEBUG:
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
-
 else:
     config_deploy = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
     DATABASES = config_deploy['databases']
