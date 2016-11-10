@@ -30,6 +30,7 @@ DEBUG = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
 
 ALLOWED_HOSTS = [
     '.stonehead-studio.com',
+    '.elasticbeanstalk.com',
 ]
 
 LOGIN_URL = '/login/'
