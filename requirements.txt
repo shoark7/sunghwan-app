@@ -44,4 +44,4 @@ traitlets==4.3.1
 uritemplate==0.6
 wcwidth==0.1.7
 websocket-client==0.37.0
-pip==9.0.0
+
