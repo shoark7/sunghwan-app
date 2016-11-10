@@ -13,8 +13,10 @@ from django.core.files.base import ContentFile
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
 
+
 # Create your views here.
 __all__ = ['movie_list', 'movie_update',]
+
 
 @login_required
 def movie_list(request):

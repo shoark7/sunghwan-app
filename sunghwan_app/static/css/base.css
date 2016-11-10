@@ -8,8 +8,7 @@
 }
 
 ul.dropdown-menu {
-  max-width: 100%;
-  min-width: 0;
+  width: 120px;
 }
 
 .label-title {
