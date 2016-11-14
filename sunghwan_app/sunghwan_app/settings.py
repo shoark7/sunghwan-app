@@ -104,7 +104,7 @@ CLIENT_SECRET = config['client_secret']
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 if DEBUG:
-    config_debug = json.loads(open(os.path.join(CONF_DIR, 'settings_debug.json')).read())
+    config = json.loads(open(os.path.join(CONF_DIR, 'settings_debug.json')).read())
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -112,8 +112,8 @@ if DEBUG:
         }
     }
 else:
-    config_deploy = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
-    DATABASES = config_deploy['databases']
+    config = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
+    DATABASES = config['databases']
 
 
 # Password validation
