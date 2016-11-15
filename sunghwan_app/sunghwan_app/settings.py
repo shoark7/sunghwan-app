@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'storages',
     'member',
     'sunghwan_park',
 ]
@@ -114,6 +115,7 @@ if DEBUG:
 else:
     config = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
     DATABASES = config['databases']
+    AWS = config['AWS']
 
 
 # Password validation
@@ -153,7 +155,60 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_ROOT = os.path.join(BASE_DIR, "..", "www", "static")
-STATIC_URL = '/static/'
+
+""""""
+AWS_STORAGE_BUCKET_NAME = 'bw-project'
+AWS_ACCESS_KEY_ID = AWS['AWS_ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY = AWS["AWS_SECRET_ACCESS_KEY"]
+
+# Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+# it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+# This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+# We also use it in the next setting.
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+# This is used by the `static` template tag from `static`, if you're using that. Or if anything else
+# refers directly to STATIC_URL. So it's safest to always set it.
+STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+# Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+# you run `collectstatic`).
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+""""""
+
+
+# STATIC_S3 = True
+#
+# if not DEBUG or STATIC_S3:
+#     AWS_HEADERS = {
+#         'Expires': 'Thu, 31 Dec 2199 20:00:00 GMT',
+#         'Cache-Control': 'max-age=94608000',
+#     }
+#     AWS_STORAGE_BUCKET_NAME = 'bw-project'
+#     AWS_ACCESS_KEY_ID = AWS['AWS_ACCESS_KEY']
+#     AWS_SECRET_ACCESS_KEY = AWS["AWS_SECRET_ACCESS_KEY"]
+#     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+#
+#     STATICFILES_LOCATION = 'static'
+#     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+#     STATICFILES_STORAGE = 'mysite.custom_storages.StaticStorage'
+#
+#     MEDIAFILES_LOCATION = 'media'
+#     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+#     DEFAULT_FILE_STORAGE = 'mysite.custom_storages.MediaStorage'
+# else:
+#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+#     STATIC_URL = '/static/'
+#     MEDIA_URL = '/media/'
+
+
+
+
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
+
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
@@ -161,6 +216,6 @@ STATICFILES_DIRS = [
 
 # media root
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '..', 'www', 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'www', 'media')
 
 
