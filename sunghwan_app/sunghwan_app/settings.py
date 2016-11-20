@@ -175,33 +175,9 @@ STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
 # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
 # you run `collectstatic`).
 STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 """"""
-
-
-# STATIC_S3 = True
-#
-# if not DEBUG or STATIC_S3:
-#     AWS_HEADERS = {
-#         'Expires': 'Thu, 31 Dec 2199 20:00:00 GMT',
-#         'Cache-Control': 'max-age=94608000',
-#     }
-#     AWS_STORAGE_BUCKET_NAME = 'bw-project'
-#     AWS_ACCESS_KEY_ID = AWS['AWS_ACCESS_KEY']
-#     AWS_SECRET_ACCESS_KEY = AWS["AWS_SECRET_ACCESS_KEY"]
-#     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-#
-#     STATICFILES_LOCATION = 'static'
-#     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-#     STATICFILES_STORAGE = 'mysite.custom_storages.StaticStorage'
-#
-#     MEDIAFILES_LOCATION = 'media'
-#     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-#     DEFAULT_FILE_STORAGE = 'mysite.custom_storages.MediaStorage'
-# else:
-#     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-#     STATIC_URL = '/static/'
-#     MEDIA_URL = '/media/'
-
 
 
 
