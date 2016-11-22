@@ -41,6 +41,7 @@ def movie_update(request):
     :return: none. Just Movie model update for the administrator.
     """
 
+
     # Check if a new movie is added
     movies = Movie.objects.all()
     movie_titles = [movie.title for movie in movies]
@@ -127,6 +128,7 @@ def movie_update(request):
         # movies = Movie.objects.all()
 
         return redirect('member:index')
+
 
 # 0 : watch_or_not, 1: title, 2: director, 3: genre,
 # 4: my_comment , 5: my_score, 6: watched_date,
