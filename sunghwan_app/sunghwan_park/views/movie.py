@@ -41,28 +41,22 @@ def movie_update(request):
     :return: none. Just Movie model update for the administrator.
     """
 
-    print()
-    print('-'*30)
-    print('-' * 30)
-    print('-' * 30)
-    print('-' * 30)
-    print()
 
     # Check if a new movie is added
     movies = Movie.objects.all()
-    print("movies is {}".format(movies))
+
     movie_titles = [movie.title for movie in movies]
 
-    xl_directory_name = os.path.join(settings.STATICFILES_LOCATION, 'others/박성환 영화 희망 및 관람 목록.xlsx')
-    print('xl_directory_name is {}'.format(xl_directory_name))
+    xl_directory_name = os.path.join(settings.STATIC_URL, 'others/박성환 영화 희망 및 관람 목록.xlsx')
+
     wb = load_workbook(xl_directory_name)
-    print('wb is {}'.format(wb))
+
     # 0 : watch_or_not, 1: title, 2: director, 3: genre,
     # 4: my_comment , 5: my_score, 6: watched_date,
 
     new_movies = []
     worksheets = wb.worksheets
-    print('worksheets is {}'.format(worksheets))
+
 
     for ws in worksheets:
 
