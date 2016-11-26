@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 CONF_DIR = settings.CONF_DIR
 config = json.loads(open(os.path.join(CONF_DIR, 'settings_deploy.json')).read())
+from sunghwan_park.models import Movie
 
 
 class Command(BaseCommand):
@@ -23,3 +24,6 @@ class Command(BaseCommand):
             )
         else:
             print('default superuser exist')
+
+        Movie.objects.all().delete()
+        print('All the movies are deleted')

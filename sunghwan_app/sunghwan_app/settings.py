@@ -216,6 +216,8 @@ if not DEBUG or STATIC_S3:
 
     STATICFILES_LOCATION = 'static'
     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+    # 장고 스토리지 쪽 파일 가져오는 건가요?
     STATICFILES_STORAGE = 'sunghwan_app.custom_storages.StaticStorage'
 
     MEDIAFILES_LOCATION = 'media'
