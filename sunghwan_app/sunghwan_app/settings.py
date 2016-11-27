@@ -220,6 +220,14 @@ if not DEBUG or STATIC_S3:
     # 장고 스토리지 쪽 파일 가져오는 건가요?
     STATICFILES_STORAGE = 'sunghwan_app.custom_storages.StaticStorage'
 
+    # from storages.backends.s3boto import S3BotoStorage
+    # class StaticStorage(S3BotoStorage):
+    #     location = settings.STATICFILES_LOCATION
+    #
+    #
+    # class MediaStorage(S3BotoStorage):
+    #     location = settings.MEDIAFILES_LOCATION
+
     MEDIAFILES_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'sunghwan_app.custom_storages.MediaStorage'
