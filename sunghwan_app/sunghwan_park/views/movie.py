@@ -12,7 +12,7 @@ from io import BytesIO
 from django.core.files.base import ContentFile
 from django.contrib.auth.decorators import login_required
 from django.contrib.admin.views.decorators import staff_member_required
-from sunghwan_app.custom_storages import StaticStorage
+# from sunghwan_app.custom_storages import StaticStorage
 
 
 # Create your views here.
@@ -41,8 +41,8 @@ def movie_update(request):
     :param request:
     :return: none. Just Movie model update for the administrator.
     """
-    static_storage = StaticStorage()
-    wb = load_workbook(static_storage.open('others/박성환 영화 희망 및 관람 목록.xlsx'))
+    # static_storage = StaticStorage()
+    # wb = load_workbook(static_storage.open('others/박성환 영화 희망 및 관람 목록.xlsx'))
 
     # Check if a new movie is added
     movies = Movie.objects.all()
@@ -50,9 +50,9 @@ def movie_update(request):
     movie_titles = [movie.title for movie in movies]
 
 ### settings for local db
-    # xl_directory_name = os.path.join(settings.STATIC_URL, 'others/박성환 영화 희망 및 관람 목록.xlsx')
+    xl_directory_name = os.path.join(settings.STATIC_URL, 'others/박성환 영화 희망 및 관람 목록.xlsx')
 
-    # wb = load_workbook(xl_directory_name)
+    wb = load_workbook(xl_directory_name)
 
     # 0 : watch_or_not, 1: title, 2: director, 3: genre,
     # 4 : my_comment , 5 : my_score, 6: watched_date,

@@ -26,7 +26,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'quamk5m$#5x-=xc17$(4al3bq4q3d_(=k%h6)-v4trvme#!d9m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = (len(sys.argv) > 1 and sys.argv[1] == 'runserver')
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '.stonehead-studio.com',
@@ -202,36 +202,36 @@ STATICFILES_DIRS = [
 ################### hanyoung teacher section ########################
 # STATIC_S3 = False
 
-if not DEBUG:
-    AWS_HEADERS = {
-        'Expires': 'Thu, 31 Dec 2199 20:00:00 GMT',
-        'Cache-Control': 'max-age=94608000',
-    }
-
-    AWS_STORAGE_BUCKET_NAME = 'bwproject'
-    AWS_ACCESS_KEY_ID = AWS['AWS_ACCESS_KEY']
-    AWS_SECRET_ACCESS_KEY = AWS["AWS_SECRET_ACCESS_KEY"]
-
-    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
-    STATICFILES_LOCATION = 'static'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-
-    # 장고 스토리지 쪽 파일 가져오는 건가요?
-    STATICFILES_STORAGE = 'sunghwan_app.custom_storages.StaticStorage'
-
-    # from storages.backends.s3boto import S3BotoStorage
-    # class StaticStorage(S3BotoStorage):
-    #     location = settings.STATICFILES_LOCATION
-    #
-    #
-    # class MediaStorage(S3BotoStorage):
-    #     location = settings.MEDIAFILES_LOCATION
-
-    MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-    DEFAULT_FILE_STORAGE = 'sunghwan_app.custom_storages.MediaStorage'
-else:
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    STATIC_URL = '/static/'
-    MEDIA_URL = '/media/'
+# if not DEBUG:
+#     AWS_HEADERS = {
+#         'Expires': 'Thu, 31 Dec 2199 20:00:00 GMT',
+#         'Cache-Control': 'max-age=94608000',
+#     }
+#
+#     AWS_STORAGE_BUCKET_NAME = 'bwproject'
+#     AWS_ACCESS_KEY_ID = AWS['AWS_ACCESS_KEY']
+#     AWS_SECRET_ACCESS_KEY = AWS["AWS_SECRET_ACCESS_KEY"]
+#
+#     AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+#
+#     STATICFILES_LOCATION = 'static'
+#     STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+#
+#     # 장고 스토리지 쪽 파일 가져오는 건가요?
+#     STATICFILES_STORAGE = 'sunghwan_app.custom_storages.StaticStorage'
+#
+#     # from storages.backends.s3boto import S3BotoStorage
+#     # class StaticStorage(S3BotoStorage):
+#     #     location = settings.STATICFILES_LOCATION
+#     #
+#     #
+#     # class MediaStorage(S3BotoStorage):
+#     #     location = settings.MEDIAFILES_LOCATION
+#
+#     MEDIAFILES_LOCATION = 'media'
+#     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+#     DEFAULT_FILE_STORAGE = 'sunghwan_app.custom_storages.MediaStorage'
+# else:
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
