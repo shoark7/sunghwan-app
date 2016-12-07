@@ -105,7 +105,7 @@ CLIENT_SECRET = config['client_secret']
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 if DEBUG:
-    config = json.loads(open(os.path.join(CONF_DIR, 'settings_debug.json')).read())
+    # config = json.loads(open(os.path.join(CONF_DIR, 'settings_debug.json')).read())
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -200,9 +200,9 @@ STATICFILES_DIRS = [
 
 
 ################### hanyoung teacher section ########################
-STATIC_S3 = True
+# STATIC_S3 = False
 
-if not DEBUG or STATIC_S3:
+if not DEBUG:
     AWS_HEADERS = {
         'Expires': 'Thu, 31 Dec 2199 20:00:00 GMT',
         'Cache-Control': 'max-age=94608000',
